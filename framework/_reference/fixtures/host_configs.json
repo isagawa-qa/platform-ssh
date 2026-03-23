@@ -1,0 +1,34 @@
+{
+  "rlc_pro": {
+    "host": "192.168.1.100",
+    "port": 22,
+    "username": "admin",
+    "key_path": "/key",
+    "variant": "rlc-pro",
+    "expected_packages": [
+      "bash",
+      "rocky-release",
+      "clk-config"
+    ],
+    "expected_services": [
+      "sshd",
+      "chronyd"
+    ]
+  },
+  "rlc_pro_ai": {
+    "host": "192.168.1.101",
+    "port": 22,
+    "username": "admin",
+    "key_path": "/key",
+    "variant": "rlc-pro-ai",
+    "expected_packages": [
+      "bash",
+      "nvidia-cuda-toolkit",
+      "python3-torch"
+    ],
+    "expected_services": [
+      "sshd",
+      "nvidia-persistenced"
+    ]
+  }
+}

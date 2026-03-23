@@ -1,0 +1,9 @@
+{
+  "domain": "ssh_testing",
+  "anchored": false,
+  "actions_since_anchor": 0,
+  "actions_limit": 10,
+  "cycling": false,
+  "completed_tasks": [],
+  "skipped_tasks": []
+}

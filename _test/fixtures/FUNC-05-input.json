@@ -1,0 +1,1 @@
+{"gate_id":"FUNC-05","description":"Validate host_configs.json","mock_input":{"file":"fixtures/host_configs.json"},"instructions":"Parse JSON"}

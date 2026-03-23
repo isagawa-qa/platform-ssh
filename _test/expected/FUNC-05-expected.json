@@ -1,0 +1,1 @@
+{"gate_id":"FUNC-05","expected_output":{"valid":true},"match_type":"contains_keys","required_keys":["rlc_pro","rlc_pro_ai"]}
