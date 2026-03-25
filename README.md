@@ -6,7 +6,7 @@
 
 The SSH Image Testing Platform connects to running Linux images via SSH, executes validation commands, and verifies the image meets expected configuration. The AI agent generates and runs the validation scripts — managed by the [Isagawa Kernel](https://github.com/isagawa-co/isagawa-kernel) to ensure it does it right every time.
 
-Built for [CIQ](https://ciq.com) (Rocky Linux enterprise distribution) but adaptable to any SSH-accessible infrastructure.
+Adaptable to any SSH-accessible infrastructure — enterprise Linux, cloud images, bare metal, containers.
 
 ---
 
@@ -77,13 +77,13 @@ Edit `framework/_reference/fixtures/host_configs.json`:
 
 ```json
 {
-  "rlc_pro": {
+  "my_server": {
     "host": "192.168.1.100",
     "port": 22,
     "username": "admin",
     "key_path": "/path/to/ssh/key",
-    "variant": "rlc-pro",
-    "expected_packages": ["bash", "rocky-release", "clk-config"],
+    "variant": "enterprise",
+    "expected_packages": ["bash", "openssh-server", "rocky-release"],
     "expected_services": ["sshd", "chronyd"]
   }
 }
@@ -133,9 +133,9 @@ pytest framework/_reference/tests/ -v
 
 | Variant | Description | Key packages |
 |---------|-------------|-------------|
-| **RLC Pro** | Enterprise Rocky Linux with extended support | `rocky-release`, `clk-config`, compliance tools |
-| **RLC Pro AI** | GPU-first Rocky Linux for AI/HPC | `nvidia-cuda-toolkit`, `python3-torch`, `doca-ofed` |
-| **Rocky Standard** | Base Rocky Linux | `bash`, `openssh-server`, `rocky-release` |
+| **Enterprise** | Enterprise Linux with extended support + compliance | `rocky-release`, compliance tools, hardened configs |
+| **AI/HPC** | GPU-first Linux for AI/HPC workloads | `nvidia-cuda-toolkit`, `python3-torch`, ML stack |
+| **Standard** | Base Linux image | `bash`, `openssh-server`, core packages |
 
 ---
 
@@ -211,20 +211,6 @@ This runs the complete test suite:
 | **L3 Production** | Framework runs against live SSH target | 6 gates |
 
 Total: **23 gates** verified against a disposable test workspace with a Docker-based Rocky Linux target.
-
----
-
-## CIQ Context
-
-[CIQ](https://ciq.com) is the enterprise company behind Rocky Linux. Their product portfolio:
-
-- **RLC Pro** — Enterprise Rocky Linux with extended support
-- **RLC Pro AI** — GPU-first Rocky Linux for AI/HPC (CUDA, PyTorch, DOCA-OFED)
-- **CIQ Linux Kernel (CLK)** — Enterprise kernel built on upstream LT kernels
-- **Ascender Pro** — IT automation
-- **Fuzzball** — Cloud HPC orchestration
-
-Their images run on AWS, GCP, Azure, bare metal, and on-premises. This platform validates any of them via SSH.
 
 ---
 
