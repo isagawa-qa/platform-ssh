@@ -229,14 +229,6 @@ Same kernel, same enforcement, same 5-layer pattern — different interface laye
 
 ---
 
-## Services
-
-We build AI-managed infrastructure validation platforms. The AI agent generates validation scripts, the kernel enforces correctness, and the framework ensures consistency across image variants and cloud providers.
-
-**[alain@isagawa.co](mailto:alain@isagawa.co)** · **[DM on LinkedIn](https://www.linkedin.com/in/alain-ignacio-54b9823)**
-
----
-
 ## License
 
 [MIT](LICENSE) — Copyright (c) 2025 Isagawa
