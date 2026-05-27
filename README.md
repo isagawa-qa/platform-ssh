@@ -1,6 +1,6 @@
 # Isagawa SSH Image Testing Platform
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-green.svg)](https://www.python.org/)
 [![Compliance Frameworks](https://img.shields.io/badge/Frameworks-8%20Standards-orange.svg)](#supported-compliance-frameworks)
 
@@ -274,7 +274,9 @@ Interested in compliance automation for your infrastructure? We work with enterp
 
 ## License
 
-[MIT](LICENSE) — Copyright (c) 2025 Isagawa
+[Proprietary — Evaluation Use Only](LICENSE). Copyright (c) 2025 Isagawa. All rights reserved.
+
+This repository is source-available for evaluation purposes. Production use, modification, and redistribution require a commercial license. Contact [alain@isagawa.co](mailto:alain@isagawa.co) for licensing.
 
 ---
 
