@@ -84,7 +84,7 @@ Test Layer         Assertions and report generation
                  └── Interface Layer   SSH connection, retry, timeout handling
 ```
 
-Four validators ship out of the box:
+Six validators ship out of the box:
 
 | Validator | Checks | Command |
 |-----------|--------|---------|
@@ -92,6 +92,8 @@ Four validators ship out of the box:
 | KernelValidator | Kernel version and loaded modules | `uname -r`, `lsmod` |
 | ServiceValidator | Expected services are running | `systemctl is-active <service>` |
 | ConfigValidator | Configuration file patterns are present | `grep -q '<pattern>' <file>` |
+| STIGValidator | DISA STIG rule compliance | Framework-specific checks |
+| ComplianceValidator | Multi-framework rule evaluation | Cross-framework rule engine |
 
 ## Kernel Enforcement
 
@@ -179,13 +181,17 @@ platform-ssh/
 │   │       └── references/             # Step-by-step specifications
 │   └── state/                          # Runtime state
 ├── framework/
+│   ├── resources/
+│   │   └── eval_config.py              # Evaluation configuration
 │   └── _reference/
 │       ├── ssh_interface.py            # Layer 1: SSH connection wrapper
 │       ├── validators/
-│       │   ├── package_validator.py    # Layer 2: Package checks
+│       │   ├── compliance_validator.py # Layer 2: Framework compliance checks
+│       │   ├── config_validator.py     # Layer 2: Config file checks
 │       │   ├── kernel_validator.py     # Layer 2: Kernel checks
+│       │   ├── package_validator.py    # Layer 2: Package checks
 │       │   ├── service_validator.py    # Layer 2: Service checks
-│       │   └── config_validator.py     # Layer 2: Config checks
+│       │   └── stig_validator.py       # Layer 2: STIG-specific checks
 │       ├── tasks/
 │       │   └── run_ssh_command.py      # Layer 3: Atomic command execution
 │       ├── roles/
@@ -194,10 +200,15 @@ platform-ssh/
 │       │   ├── conftest.py             # Mock SSH fixtures
 │       │   └── test_ssh_batch.py       # Layer 5: Unit tests
 │       └── fixtures/
-│           └── host_configs.json       # Target host definitions
-├── CLAUDE.md                           # Kernel bootstrap configuration
-├── CONTRIBUTING.md                     # Development guidelines
-├── FRAMEWORK.md                        # Architecture overview
+│           ├── host_configs.json       # Target host definitions
+│           ├── stig_rules.json         # DISA STIG rules
+│           ├── cis_l1_rules.json       # CIS Level 1 rules
+│           ├── nist_rules.json         # NIST 800-171 rules
+│           ├── fips_rules.json         # FIPS 140-3 rules
+│           ├── pci_dss_rules.json      # PCI DSS rules
+│           ├── hipaa_rules.json        # HIPAA rules
+│           ├── soc2_rules.json         # SOC 2 rules
+│           └── iso27001_rules.json     # ISO 27001 rules
 ├── requirements.txt                    # Dependencies (paramiko, pytest)
 └── README.md
 ```
@@ -210,8 +221,11 @@ SSH compliance is one domain. The Isagawa Kernel supports any domain that can be
 |----------|-----------|-----------|
 | [QA Platform (Selenium)](https://github.com/isagawa-qa/platform-selenium) | Browser | Web UI workflows |
 | SSH Compliance (this repo) | SSH | Linux image configuration |
-| QA Platform (Playwright) | Browser | Modern web applications |
-| Docker Platform | Docker CLI | Container images |
+| [QA Platform (Playwright)](https://github.com/isagawa-qa/platform-playwright) | Browser | Modern web applications |
+| [QA Platform (Docker)](https://github.com/isagawa-qa/platform-docker) | Docker CLI | Container images |
+| [QA Platform (DeepEval)](https://github.com/isagawa-qa/platform-deepeval) | Python | LLM output quality |
+| [QA Platform (API)](https://github.com/isagawa-qa/platform-api) | HTTP | REST/GraphQL endpoints |
+| [Vibe Coder Agent](https://github.com/isagawa-co/vibe-coder-agent) | AI Agent | AI-assisted code generation |
 
 ## Contact
 
