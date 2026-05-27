@@ -1,0 +1,13 @@
+[
+  {"rule_id": "HIPAA-001", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "Protocol", "expected": "2", "severity": "high", "remediation": "Set Protocol 2 (HIPAA §164.312(e)(1) — encryption in transit)"},
+  {"rule_id": "HIPAA-002", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "PermitRootLogin", "expected": "no", "severity": "high", "remediation": "Set PermitRootLogin no (HIPAA §164.312(a)(1) — unique user identification)"},
+  {"rule_id": "HIPAA-003", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "PermitEmptyPasswords", "expected": "no", "severity": "high", "remediation": "Set PermitEmptyPasswords no (HIPAA §164.312(d) — person authentication)"},
+  {"rule_id": "HIPAA-004", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "ClientAliveInterval", "expected": "300", "severity": "high", "remediation": "Set ClientAliveInterval 300 (HIPAA §164.312(a)(2)(iii) — automatic logoff)"},
+  {"rule_id": "HIPAA-005", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "ClientAliveCountMax", "expected": "0", "severity": "high", "remediation": "Set ClientAliveCountMax 0 (HIPAA §164.312(a)(2)(iii))"},
+  {"rule_id": "HIPAA-006", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "LogLevel", "expected": "VERBOSE", "severity": "high", "remediation": "Set LogLevel VERBOSE (HIPAA §164.312(b) — audit controls)"},
+  {"rule_id": "HIPAA-007", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "MaxAuthTries", "expected": "3", "severity": "medium", "remediation": "Set MaxAuthTries 3 (HIPAA §164.312(a)(1) — access control)"},
+  {"rule_id": "HIPAA-008", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "Banner", "expected": "/etc/issue.net", "severity": "medium", "remediation": "Set Banner /etc/issue.net (HIPAA §164.310(b) — facility access notice)"},
+  {"rule_id": "HIPAA-009", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "HostbasedAuthentication", "expected": "no", "severity": "high", "remediation": "Set HostbasedAuthentication no (HIPAA §164.312(d))"},
+  {"rule_id": "HIPAA-010", "check_type": "config_absent", "file": "/etc/ssh/sshd_config", "directive": "PermitUserEnvironment yes", "severity": "high", "remediation": "Remove PermitUserEnvironment yes (HIPAA §164.312(a)(1))"},
+  {"rule_id": "HIPAA-011", "check_type": "service_status", "service": "sshd", "expected_status": "active", "severity": "high", "remediation": "Ensure sshd is running (HIPAA §164.312(e)(1))"}
+]
