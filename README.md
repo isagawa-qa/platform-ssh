@@ -1,5 +1,9 @@
 # Isagawa SSH Image Testing Platform
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Python 3.10+](https://img.shields.io/badge/Python-3.10%2B-green.svg)](https://www.python.org/)
+[![Compliance Frameworks](https://img.shields.io/badge/Frameworks-8%20Standards-orange.svg)](#supported-compliance-frameworks)
+
 ### AI Execution Management for Infrastructure Validation
 
 > AI can generate validation scripts. But can you trust it to test your production images correctly?
@@ -127,6 +131,35 @@ pytest framework/_reference/tests/ -v
 # Use /kernel/prod-test for full L1/L2/L3 validation
 ```
 
+### Example Scan Output
+
+```
+$ pytest framework/_reference/tests/ -v
+
+======================== SSH Compliance Scan ========================
+Target: 192.168.1.100 (enterprise variant)
+Frameworks: STIG, CIS, NIST 800-171, FIPS 140-3
+
+STIG-001  PermitRootLogin .......... PASS  (no)
+STIG-002  Protocol ................. PASS  (2)
+STIG-003  MaxAuthTries ............. PASS  (4)
+CIS-001   LogLevel ................. PASS  (INFO)
+CIS-002   X11Forwarding ............ PASS  (no)
+CIS-003   MaxStartups .............. PASS  (10:30:60)
+NIST-001  LoginGraceTime ........... PASS  (60)
+NIST-002  PermitEmptyPasswords ..... PASS  (no)
+NIST-003  Ciphers .................. FAIL  (aes128-cbc not allowed)
+FIPS-001  KexAlgorithms ............ PASS  (ecdh-sha2-nistp256)
+FIPS-002  MACs ..................... PASS  (hmac-sha2-256)
+FIPS-003  HostKeyAlgorithms ........ PASS  (rsa-sha2-512)
+
+======================== Results ====================================
+Passed: 11/12 (91.7%)
+Failed: 1  [NIST-003: non-FIPS cipher detected]
+Evidence: captured in _test/validation-report.json
+================================================================
+```
+
 ---
 
 ## Supported Image Variants
@@ -226,6 +259,16 @@ SSH image testing is one domain. The Isagawa Kernel supports **any** domain.
 | Docker Platform | Docker CLI | Container images |
 
 Same kernel, same enforcement, same 5-layer pattern — different interface layer.
+
+---
+
+## Get in Touch
+
+Interested in compliance automation for your infrastructure? We work with enterprise Linux teams, defense contractors, and MSPs to deploy automated SSH validation at scale.
+
+- **Email:** [alain@isagawa.co](mailto:alain@isagawa.co)
+- **Website:** [isagawa.co](https://www.isagawa.co)
+- **SSH Platform:** [isagawa.co/ssh-compliance](https://www.isagawa.co/ssh-compliance.html)
 
 ---
 
