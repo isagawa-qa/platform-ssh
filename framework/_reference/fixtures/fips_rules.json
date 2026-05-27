@@ -1,0 +1,10 @@
+[
+  {"rule_id": "FIPS-001", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "Ciphers", "expected": "aes256-ctr,aes192-ctr,aes128-ctr", "severity": "high", "remediation": "Set Ciphers to FIPS-approved algorithms in /etc/ssh/sshd_config"},
+  {"rule_id": "FIPS-002", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "MACs", "expected": "hmac-sha2-512,hmac-sha2-256", "severity": "high", "remediation": "Set MACs to FIPS-approved algorithms in /etc/ssh/sshd_config"},
+  {"rule_id": "FIPS-003", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "KexAlgorithms", "expected": "ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group14-sha256,diffie-hellman-group16-sha512", "severity": "high", "remediation": "Set KexAlgorithms to FIPS-approved algorithms in /etc/ssh/sshd_config"},
+  {"rule_id": "FIPS-004", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "HostKeyAlgorithms", "expected": "ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,rsa-sha2-512,rsa-sha2-256", "severity": "high", "remediation": "Set HostKeyAlgorithms to FIPS-approved algorithms in /etc/ssh/sshd_config"},
+  {"rule_id": "FIPS-005", "check_type": "config_absent", "file": "/etc/ssh/sshd_config", "directive": "Ciphers.*chacha20", "severity": "high", "remediation": "Remove chacha20-poly1305 from Ciphers (not FIPS-approved)"},
+  {"rule_id": "FIPS-006", "check_type": "config_absent", "file": "/etc/ssh/sshd_config", "directive": "MACs.*hmac-md5", "severity": "high", "remediation": "Remove hmac-md5 from MACs (not FIPS-approved)"},
+  {"rule_id": "FIPS-007", "check_type": "config_absent", "file": "/etc/ssh/sshd_config", "directive": "MACs.*hmac-sha1 ", "severity": "high", "remediation": "Remove hmac-sha1 from MACs (not FIPS-approved)"},
+  {"rule_id": "FIPS-008", "check_type": "package_installed", "package": "openssh-server", "severity": "high", "remediation": "Install FIPS-validated openssh-server package"}
+]

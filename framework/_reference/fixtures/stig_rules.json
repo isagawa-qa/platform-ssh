@@ -1,0 +1,133 @@
+[
+  {
+    "rule_id": "STIG-001",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "PermitRootLogin",
+    "expected": "no",
+    "severity": "high",
+    "remediation": "Set PermitRootLogin no in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-002",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "MaxAuthTries",
+    "expected": "4",
+    "severity": "medium",
+    "remediation": "Set MaxAuthTries 4 in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-003",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "ClientAliveInterval",
+    "expected": "600",
+    "severity": "medium",
+    "remediation": "Set ClientAliveInterval 600 in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-004",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "ClientAliveCountMax",
+    "expected": "0",
+    "severity": "medium",
+    "remediation": "Set ClientAliveCountMax 0 in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-005",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "LoginGraceTime",
+    "expected": "60",
+    "severity": "medium",
+    "remediation": "Set LoginGraceTime 60 in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-006",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "PermitEmptyPasswords",
+    "expected": "no",
+    "severity": "high",
+    "remediation": "Set PermitEmptyPasswords no in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-007",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "X11Forwarding",
+    "expected": "no",
+    "severity": "medium",
+    "remediation": "Set X11Forwarding no in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-008",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "IgnoreRhosts",
+    "expected": "yes",
+    "severity": "medium",
+    "remediation": "Set IgnoreRhosts yes in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-009",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "HostbasedAuthentication",
+    "expected": "no",
+    "severity": "high",
+    "remediation": "Set HostbasedAuthentication no in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-010",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "UsePAM",
+    "expected": "yes",
+    "severity": "medium",
+    "remediation": "Set UsePAM yes in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-011",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "StrictModes",
+    "expected": "yes",
+    "severity": "medium",
+    "remediation": "Set StrictModes yes in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-012",
+    "check_type": "config_absent",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "PermitUserEnvironment yes",
+    "severity": "critical",
+    "remediation": "Remove or set PermitUserEnvironment no in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-013",
+    "check_type": "config_value",
+    "file": "/etc/ssh/sshd_config",
+    "directive": "LogLevel",
+    "expected": "VERBOSE",
+    "severity": "medium",
+    "remediation": "Set LogLevel VERBOSE in /etc/ssh/sshd_config"
+  },
+  {
+    "rule_id": "STIG-014",
+    "check_type": "service_status",
+    "service": "sshd",
+    "expected_status": "active",
+    "severity": "high",
+    "remediation": "Start and enable sshd service: systemctl enable --now sshd"
+  },
+  {
+    "rule_id": "STIG-015",
+    "check_type": "package_installed",
+    "package": "openssh-server",
+    "severity": "high",
+    "remediation": "Install openssh-server: dnf install openssh-server"
+  }
+]

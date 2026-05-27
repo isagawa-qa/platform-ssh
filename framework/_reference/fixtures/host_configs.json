@@ -5,6 +5,7 @@
     "username": "admin",
     "key_path": "/key",
     "variant": "rlc-pro",
+    "frameworks": ["stig", "cis_l1", "fips", "nist"],
     "expected_packages": [
       "bash",
       "rocky-release",
@@ -21,6 +22,7 @@
     "username": "admin",
     "key_path": "/key",
     "variant": "rlc-pro-ai",
+    "frameworks": ["stig", "cis_l1", "fips", "nist"],
     "expected_packages": [
       "bash",
       "nvidia-cuda-toolkit",

@@ -1,0 +1,14 @@
+[
+  {"rule_id": "CIS-001", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "Protocol", "expected": "2", "severity": "high", "remediation": "Set Protocol 2 in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-002", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "LogLevel", "expected": "INFO", "severity": "medium", "remediation": "Set LogLevel INFO in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-003", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "MaxAuthTries", "expected": "4", "severity": "medium", "remediation": "Set MaxAuthTries 4 in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-004", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "IgnoreRhosts", "expected": "yes", "severity": "medium", "remediation": "Set IgnoreRhosts yes in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-005", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "HostbasedAuthentication", "expected": "no", "severity": "high", "remediation": "Set HostbasedAuthentication no in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-006", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "PermitRootLogin", "expected": "no", "severity": "high", "remediation": "Set PermitRootLogin no in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-007", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "PermitEmptyPasswords", "expected": "no", "severity": "high", "remediation": "Set PermitEmptyPasswords no in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-008", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "ClientAliveInterval", "expected": "300", "severity": "medium", "remediation": "Set ClientAliveInterval 300 in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-009", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "ClientAliveCountMax", "expected": "3", "severity": "medium", "remediation": "Set ClientAliveCountMax 3 in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-010", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "LoginGraceTime", "expected": "60", "severity": "medium", "remediation": "Set LoginGraceTime 60 in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-011", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "MaxStartups", "expected": "10:30:60", "severity": "medium", "remediation": "Set MaxStartups 10:30:60 in /etc/ssh/sshd_config"},
+  {"rule_id": "CIS-012", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "MaxSessions", "expected": "10", "severity": "low", "remediation": "Set MaxSessions 10 in /etc/ssh/sshd_config"}
+]

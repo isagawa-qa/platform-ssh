@@ -1,0 +1,14 @@
+[
+  {"rule_id": "ISO-001", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "Protocol", "expected": "2", "severity": "high", "remediation": "Set Protocol 2 (ISO 27001 A.10.1.1 — cryptographic controls)"},
+  {"rule_id": "ISO-002", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "PermitRootLogin", "expected": "no", "severity": "high", "remediation": "Set PermitRootLogin no (ISO 27001 A.9.2.3 — privileged access management)"},
+  {"rule_id": "ISO-003", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "PermitEmptyPasswords", "expected": "no", "severity": "high", "remediation": "Set PermitEmptyPasswords no (ISO 27001 A.9.4.3 — password management)"},
+  {"rule_id": "ISO-004", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "MaxAuthTries", "expected": "3", "severity": "medium", "remediation": "Set MaxAuthTries 3 (ISO 27001 A.9.4.2 — secure log-on)"},
+  {"rule_id": "ISO-005", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "ClientAliveInterval", "expected": "300", "severity": "medium", "remediation": "Set ClientAliveInterval 300 (ISO 27001 A.11.2.8 — unattended equipment)"},
+  {"rule_id": "ISO-006", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "ClientAliveCountMax", "expected": "3", "severity": "medium", "remediation": "Set ClientAliveCountMax 3 (ISO 27001 A.11.2.8)"},
+  {"rule_id": "ISO-007", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "LogLevel", "expected": "VERBOSE", "severity": "medium", "remediation": "Set LogLevel VERBOSE (ISO 27001 A.12.4.1 — event logging)"},
+  {"rule_id": "ISO-008", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "HostbasedAuthentication", "expected": "no", "severity": "high", "remediation": "Set HostbasedAuthentication no (ISO 27001 A.9.4.2)"},
+  {"rule_id": "ISO-009", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "IgnoreRhosts", "expected": "yes", "severity": "medium", "remediation": "Set IgnoreRhosts yes (ISO 27001 A.9.4.2)"},
+  {"rule_id": "ISO-010", "check_type": "config_value", "file": "/etc/ssh/sshd_config", "directive": "LoginGraceTime", "expected": "60", "severity": "low", "remediation": "Set LoginGraceTime 60 (ISO 27001 A.9.4.2)"},
+  {"rule_id": "ISO-011", "check_type": "config_absent", "file": "/etc/ssh/sshd_config", "directive": "PermitUserEnvironment yes", "severity": "high", "remediation": "Remove PermitUserEnvironment yes (ISO 27001 A.9.4.1)"},
+  {"rule_id": "ISO-012", "check_type": "service_status", "service": "sshd", "expected_status": "active", "severity": "high", "remediation": "Ensure sshd is running (ISO 27001 A.13.1.1)"}
+]
