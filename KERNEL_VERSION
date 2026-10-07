@@ -1,0 +1,32 @@
+source: https://github.com/isagawa-co/isagawa-kernel-canonical
+commit: 3d9d00d7da9ba16fbae1d051355b5b6ac1439be4
+pinned: 2026-10-07
+manifest: kernel-manifest.json core (no builder extensions)
+files:
+.claude/commands/kernel/anchor.md identical
+.claude/commands/kernel/complete.md identical
+.claude/commands/kernel/domain-setup.md identical
+.claude/commands/kernel/fix.md identical
+.claude/commands/kernel/learn.md identical
+.claude/commands/kernel/session-start.md identical
+.claude/hooks/actions-log-appender.py identical
+.claude/hooks/auto-approve-claude-writes.py identical
+.claude/hooks/domain-gate-enforcer.template.py identical
+.claude/hooks/test-failure-detector.py identical
+.claude/hooks/universal-gate-enforcer.py identical
+.claude/skills/autonomous-cycling/SKILL.md identical
+.claude/skills/autonomous-cycling/workflow.md identical
+.claude/skills/kernel-domain-setup/SKILL.md identical
+.claude/skills/kernel-domain-setup/references/step-01-prerequisites.md identical
+.claude/skills/kernel-domain-setup/references/step-02-discover.md identical
+.claude/skills/kernel-domain-setup/references/step-03-read.md identical
+.claude/skills/kernel-domain-setup/references/step-04-extract.md identical
+.claude/skills/kernel-domain-setup/references/step-05-enforcement.md identical
+.claude/skills/kernel-domain-setup/references/step-06-workflow.md identical
+.claude/skills/kernel-domain-setup/references/step-07-roadmap.md identical
+.claude/skills/kernel-domain-setup/references/step-08-protocol.md identical
+.claude/skills/kernel-domain-setup/references/step-09-commands.md identical
+.claude/skills/kernel-domain-setup/references/step-10-state.md identical
+.claude/skills/kernel-domain-setup/references/step-11-report.md identical
+lib/common.sh identical
+CLAUDE.md identical

@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+*.so
+.env
+.venv
+venv/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude Code
+.claude/state/
+
+# Build pipeline scratch, never shipped
+_context/
+
+# Logs
+*.log
+
+# Test artifacts
+.pytest_cache/
+.coverage
+htmlcov/
+_test/
+
+# SSH key material for the L3 target is generated at run time, never committed
+tests/target/*_key
+tests/target/*_key.pub
+id_rsa*
+id_ed25519*
