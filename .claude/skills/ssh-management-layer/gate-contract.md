@@ -1,7 +1,12 @@
-# Gate Contract — SSH Management Layer
+# Gate Contract: SSH Management Layer
 
 ## Verification Methods
-→ [[references/verification-methods.md]]
+- `file_exists`, `grep`, `json_valid`: structural checks, no execution
+- `run_code`: the command exits 0
+- `run_test`: pytest exits 0 with at least one test selected
+
+Paths without a leading directory are relative to `framework/_reference/`. Run
+`run_code` and `run_test` gates from the repo root.
 
 ## Structural Gates
 
@@ -9,16 +14,16 @@
 |----|-------|--------|---------------|-------------|
 | BUILD-01 | ssh_interface.py exists | file_exists | `test -f framework/_reference/ssh_interface.py` | Create |
 | BUILD-02 | SSHInterface class | grep | `grep -q 'class SSHInterface' ssh_interface.py` | Add class |
-| BUILD-03 | Retry logic | grep | `grep -q 'retry' ssh_interface.py` | Add retry |
-| BUILD-04 | 4 validator files | file_exists | `ls validators/*.py | wc -l` = 4 | Create |
+| BUILD-03 | Retry logic | grep | `grep -q 'self.retries' ssh_interface.py` | Add retry |
+| BUILD-04 | Validator files | file_exists | `ls validators/*.py \| wc -l` = 6 (package, kernel, service, config, compliance base, STIG example) | Create |
 | BUILD-05 | run_ssh_command.py | file_exists | `test -f tasks/run_ssh_command.py` | Create |
 | BUILD-06 | ssh_batch_executor.py | file_exists | `test -f roles/ssh_batch_executor.py` | Create |
 | BUILD-07 | test_ssh_batch.py | file_exists | `test -f tests/test_ssh_batch.py` | Create |
 | BUILD-08 | conftest.py | file_exists | `test -f tests/conftest.py` | Create |
 | BUILD-09 | host_configs.json | file_exists | `test -f fixtures/host_configs.json` | Create |
 | BUILD-10 | requirements.txt | grep | `grep -q 'paramiko' requirements.txt` | Add dep |
-| BUILD-11 | FRAMEWORK.md | file_exists | `test -f FRAMEWORK.md` | Create |
 | BUILD-12 | SKILL.md | file_exists | `test -f .claude/skills/ssh-management-layer/SKILL.md` | Create |
+| BUILD-13 | Rule fixtures | file_exists | `ls fixtures/*_rules.json \| wc -l` = 8 | Restore |
 
 ## Functional Gates
 
@@ -29,7 +34,8 @@
 | FUNC-03 | Task imports | run_code | `python -c "from tasks.run_ssh_command import run_ssh_command"` | Fix |
 | FUNC-04 | Role imports | run_code | `python -c "from roles.ssh_batch_executor import SSHBatchExecutor"` | Fix |
 | FUNC-05 | host_configs.json valid | json_valid | `python -c "import json; json.load(open('fixtures/host_configs.json'))"` | Fix |
-| TEST-01 | All unit tests pass | run_test | `pytest tests/ -v` exits 0 | Fix |
+| TEST-01 | Unit tests pass | run_test | `pytest framework/_reference/tests -m "not live" -v` exits 0 | Fix |
+| TEST-02 | Live tests pass | run_test | With a target (see `tests/target/Dockerfile`) and `SSH_LIVE_REQUIRED=1`, `pytest framework/_reference/tests -m live -v` exits 0 with 0 skipped | Fix |
 
 ## Integration Gates
 
@@ -44,8 +50,7 @@
 | ID | Check | Method | Pass Criteria | Fail Action |
 |----|-------|--------|---------------|-------------|
 | DOC-01 | README has install | grep | `grep -q 'install' README.md` | Add |
-| DOC-02 | FRAMEWORK explains layers | grep | `grep -q 'Layer' FRAMEWORK.md` | Add |
 
 ## Summary
-- Structural: 12, Functional: 6, Integration: 3, Documentation: 2
+- Structural: 12, Functional: 7, Integration: 3, Documentation: 1
 - **Total: 23 gates**
