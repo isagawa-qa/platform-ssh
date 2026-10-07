@@ -1,5 +1,5 @@
 """
-ComplianceValidator — Abstract Base Class
+ComplianceValidator: Abstract Base Class
 
 All framework-specific validators (STIG, CIS, NIST, etc.) inherit from this base class.
 Rules are data-driven: each rule specifies a check_type, and validate() dispatches to the
@@ -58,7 +58,7 @@ class ComplianceValidator(ABC):
         """
         try:
             result = self.ssh.execute(f"grep -i '^{directive}' {file}")
-            if result.get("returncode") != 0:
+            if result.get("exit_code") != 0:
                 actual = "not found"
                 passed = False
                 evidence = f"Directive '{directive}' not found in {file}"
@@ -113,7 +113,7 @@ class ComplianceValidator(ABC):
         """
         try:
             result = self.ssh.execute(f"grep -i '{directive}' {file}")
-            passed = result.get("returncode") != 0
+            passed = result.get("exit_code") != 0
             if passed:
                 actual = "absent"
                 evidence = f"Directive pattern '{directive}' not found"
@@ -162,7 +162,7 @@ class ComplianceValidator(ABC):
         """
         try:
             result = self.ssh.execute(f"rpm -q {package}")
-            passed = result.get("returncode") == 0
+            passed = result.get("exit_code") == 0
             actual = "installed" if passed else "not installed"
             evidence = result.get("stdout", "").strip() if passed else "Package not found"
 
@@ -211,16 +211,18 @@ class ComplianceValidator(ABC):
         try:
             # Try systemctl first
             result = self.ssh.execute(f"systemctl is-active {service}")
-            if result.get("returncode") == 0:
+            if result.get("exit_code") == 0:
                 actual = result.get("stdout", "").strip()
                 passed = actual.lower() == expected_status.lower()
                 evidence = f"systemctl is-active: {actual}"
             else:
-                # Fallback to pgrep
+                # Fallback to pgrep (hosts without systemd, e.g. containers).
+                # Report in systemctl vocabulary, which is what the rules expect.
                 result = self.ssh.execute(f"pgrep -f {service}")
-                actual = "running" if result.get("returncode") == 0 else "stopped"
+                found = result.get("exit_code") == 0
+                actual = "active" if found else "inactive"
                 passed = actual.lower() == expected_status.lower()
-                evidence = f"pgrep: {actual}"
+                evidence = f"pgrep: process {'found' if found else 'not found'} ({actual})"
 
             return self.make_result(
                 rule_id=rule_id,

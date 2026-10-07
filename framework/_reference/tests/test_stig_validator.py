@@ -9,7 +9,7 @@ from validators.stig_validator import STIGValidator
 
 
 class TestSTIGValidatorUnit:
-    """Unit tests — no SSH connection needed."""
+    """Unit tests: no SSH connection needed."""
 
     def test_framework_attributes(self):
         mock_ssh = MagicMock()
@@ -56,22 +56,9 @@ class TestSTIGValidatorLive:
     """Live tests against Docker SSH target."""
 
     @pytest.fixture
-    def ssh_connection(self):
-        try:
-            sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
-            from ssh_interface import SSHInterface
-            hc = {
-                "host": "localhost",
-                "port": 2222,
-                "username": "testuser",
-                "key_path": os.path.join(os.path.dirname(__file__), '..', '..', '_test', 'docker', 'test_key')
-            }
-            ssh = SSHInterface(hc)
-            ssh.connect()
-            yield ssh
-            ssh.close()
-        except Exception:
-            pytest.skip("SSH target not available")
+    def ssh_connection(self, live_ssh):
+        """Live target from conftest's live_ssh (SSH_TEST_* env vars)."""
+        return live_ssh
 
     @pytest.mark.live
     def test_live_stig_validation(self, ssh_connection):
