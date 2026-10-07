@@ -30,3 +30,4 @@ files:
 .claude/skills/kernel-domain-setup/references/step-11-report.md identical
 lib/common.sh identical
 CLAUDE.md identical
+kernel-manifest.json identical

@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "description": "Isagawa Kernel — core files manifest",
+  "core": {
+    "commands": [
+      ".claude/commands/kernel/session-start.md",
+      ".claude/commands/kernel/anchor.md",
+      ".claude/commands/kernel/learn.md",
+      ".claude/commands/kernel/complete.md",
+      ".claude/commands/kernel/fix.md",
+      ".claude/commands/kernel/domain-setup.md"
+    ],
+    "hooks": [
+      ".claude/hooks/universal-gate-enforcer.py",
+      ".claude/hooks/actions-log-appender.py",
+      ".claude/hooks/test-failure-detector.py",
+      ".claude/hooks/auto-approve-claude-writes.py"
+    ],
+    "skills": [
+      ".claude/skills/kernel-domain-setup/",
+      ".claude/skills/autonomous-cycling/"
+    ],
+    "scripts": [
+      "lib/common.sh"
+    ],
+    "config": [
+      "CLAUDE.md",
+      ".claude/settings.local.json"
+    ],
+    "lessons": [
+      ".claude/lessons/lessons.md"
+    ]
+  }
+}
