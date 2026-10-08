@@ -1,0 +1,85 @@
+name: prod-test L3
+
+# The LIVE half of the test suite: every validator and all 88 compliance rules
+# run over a real SSH connection against a real Rocky Linux 9 sshd, with no
+# mocks. The target is built from tests/target/ with a key generated for this
+# run only. test_live_pipeline.py compares every rule's verdict with the
+# verdict derived independently from tests/target/sshd_config.
+#
+# SSH_LIVE_REQUIRED=1 turns a missing or unreachable target into a failure,
+# and the run fails if pytest collects nothing or skips anything, so this job
+# cannot go green without the live tests actually running.
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  l3:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install the platform's dependencies
+        run: |
+          set -euo pipefail
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Build and start the SSH target, run L3
+        env:
+          SSH_TEST_HOST: 127.0.0.1
+          SSH_TEST_PORT: '2222'
+          SSH_TEST_USER: root
+          SSH_LIVE_REQUIRED: '1'
+        run: |
+          set -uo pipefail
+          KEYDIR="$(mktemp -d)"
+          ssh-keygen -q -t ed25519 -N "" -f "$KEYDIR/l3_key"
+          docker build -q --build-arg AUTHORIZED_KEY="$(cat "$KEYDIR/l3_key.pub")" \
+            -t platform-ssh-l3-target tests/target
+          docker run -d --name platform-ssh-l3 -p 2222:22 platform-ssh-l3-target
+
+          for i in $(seq 1 30); do
+            ssh -i "$KEYDIR/l3_key" -p 2222 -o StrictHostKeyChecking=no \
+              -o UserKnownHostsFile=/dev/null -o BatchMode=yes root@127.0.0.1 true \
+              2>/dev/null && break
+            sleep 1
+          done
+
+          mkdir -p _test
+          SSH_TEST_KEY="$KEYDIR/l3_key" \
+          SSH_TEST_SSHD_CONFIG="$PWD/tests/target/sshd_config" \
+            python -m pytest framework/_reference/tests -m live -v -rs \
+              --junitxml=_test/l3-junit.xml 2>&1 | tee _test/l3-pytest.log
+          rc=${PIPESTATUS[0]}
+
+          docker logs platform-ssh-l3 > _test/target-sshd.log 2>&1 || true
+          docker rm -f platform-ssh-l3 > /dev/null 2>&1 || true
+
+          # "collected N" counts deselected tests too; require live tests to have passed.
+          grep -Eq '[1-9][0-9]* selected' _test/l3-pytest.log \
+            || { echo "::error::L3 selected no live tests"; exit 1; }
+          grep -Eq '[1-9][0-9]* passed' _test/l3-pytest.log \
+            || { echo "::error::L3 passed no tests"; exit 1; }
+          if grep -Eq '[0-9]+ skipped' _test/l3-pytest.log; then
+            echo "::error::L3 skipped tests; a live run must not skip"; exit 1
+          fi
+          exit "$rc"
+
+      - name: Upload L3 evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: prod-test-l3-evidence
+          path: _test/
+          if-no-files-found: warn

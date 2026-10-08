@@ -1,0 +1,31 @@
+# sshd_config for the L3 SSH target (tests/target/Dockerfile).
+#
+# Deliberately mixed: most hardening directives are set to compliant values,
+# and a few are not, so the live suite proves both PASS and FAIL verdicts.
+# Known non-compliant here: PermitRootLogin (key-only root is needed to read
+# this 0600 file), and Protocol / HostKeyAlgorithms are left unset.
+# test_live_pipeline.py derives every rule's expected verdict from this file.
+# One line per directive, no Include, so nothing else changes the values.
+
+PermitRootLogin prohibit-password
+PubkeyAuthentication yes
+PasswordAuthentication no
+AuthorizedKeysFile .ssh/authorized_keys
+PermitEmptyPasswords no
+HostbasedAuthentication no
+IgnoreRhosts yes
+StrictModes yes
+UsePAM yes
+X11Forwarding no
+MaxAuthTries 4
+MaxSessions 10
+MaxStartups 10:30:60
+LoginGraceTime 60
+ClientAliveInterval 600
+ClientAliveCountMax 0
+LogLevel VERBOSE
+Banner /etc/issue.net
+Ciphers aes256-ctr,aes192-ctr,aes128-ctr
+MACs hmac-sha2-512,hmac-sha2-256
+KexAlgorithms ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group14-sha256,diffie-hellman-group16-sha512
+Subsystem sftp /usr/libexec/openssh/sftp-server

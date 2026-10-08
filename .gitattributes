@@ -1,0 +1,5 @@
+# Authored on Windows, executed on Linux runners and targets: keep LF in the
+# repo and in checkouts so shell scripts and sshd_config never carry CR.
+* text=auto eol=lf
+*.png binary
+*.zip binary
